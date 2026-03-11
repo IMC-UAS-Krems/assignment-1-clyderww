@@ -4,7 +4,6 @@ from .users import PremiumUser, FamilyAccountUser, FamilyMember
 from .playlists import CollaborativePlaylist
 
 class StreamingPlatform:
-
     def __init__(self, name):
         self.name = name
         self.users = []
