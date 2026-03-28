@@ -1,3 +1,4 @@
+from .tracks import Song
 from datetime import datetime, timedelta
 
 from .users import PremiumUser, FamilyAccountUser, FamilyMember
@@ -138,9 +139,9 @@ class StreamingPlatform:
             for d in durations:
                 total += d
 
-            avg_minutes = (total / len(durations)) / 60
+            avg_seconds = (total / len(durations))
 
-            results.append((user_type, avg_minutes))
+            results.append((user_type, avg_seconds))
 
         results.sort(key=lambda x: x[1], reverse=True)
 
@@ -162,7 +163,7 @@ class StreamingPlatform:
         artist_seconds = {}
 
         for s in self.sessions:
-            if s.track.artist:
+            if isinstance(s.track, Song) and s.track.artist:
                 artist_id = s.track.artist.artist_id
 
                 if artist_id not in artist_seconds:
@@ -176,7 +177,7 @@ class StreamingPlatform:
             seconds = artist_seconds.get(artist.artist_id, 0)
 
             if seconds > 0:
-                results.append((artist, seconds / 60))
+                results.append((artist, seconds))
 
         results.sort(key=lambda x: x[1], reverse=True)
 
