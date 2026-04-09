@@ -1,4 +1,5 @@
-class Track:
+from abc import ABC
+class Track(ABC):
     """
     Base class representing any playable track on the platform.
 
